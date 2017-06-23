@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+format来源于select * from wifi.device_info里面的列。同时以@@开头的表示系统动态变化的
+sql:执行的sql,注意列名不要重复,其次必须包含site_id列，最后必须包含
+-->
+<data sql="select a.hotspot_mac,b.device_id,b.site_id,a.ssid,a.field_strength,a.channel,a.id_enctypt_type,b.longti,b.lat,a.firm_name from wifi.hotspot a,(select * from wifi.device_info ) b" orderby="hotspot_mac">
+  <item name="id" default="" format="@@id"></item>
+  <item name="hotspot_mac" default="" format="hotspot_mac"></item>  
+  <item name="detect_time" default="" format="@@tenMin"></item>  
+  <item name="ssid" default="" format="ssid"></item>
+  <item name="field_strength" default="" format="field_strength"></item>
+  <item name="channel" default="" format="channel"></item>
+  <item name="id_enctypt_type" default="" format="id_enctypt_type"></item>
+  <item name="posx" default="" format=""></item>
+  <item name="posy" default="" format=""></item>
+  <item name="site_id" default="" format="site_id"></item>
+  <item name="device_id" default="" format="device_id"></item>
+  <item name="device_longti" default="" format="Longti"></item>
+  <item name="device_lat" default="" format="Lat"></item>
+  <item name="firm_name" default="" format="firm_name"></item>
+</data>

@@ -1,0 +1,1 @@
+﻿/*将终端MAC和热点MAC的两个Excel导入数据库,并分别命名为wifi.terminal_mac和wifi.hotspot*/

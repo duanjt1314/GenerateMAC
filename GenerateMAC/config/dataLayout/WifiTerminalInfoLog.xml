@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+format来源于select * from wifi.device_info里面的列。同时以@@开头的表示系统动态变化的
+sql:执行的sql,注意列名不要重复,其次必须包含site_id列，最后必须包含
+-->
+<data sql="select a.terminal_mac,a.terminal_brand,b.device_id,b.site_id,b.longti,b.lat,b.region_id,b.firm_id from wifi.terminal_mac a,(select x.*,y.region_id from wifi.device_info x inner join wifi.site_info y on x.site_id=y.site_id ) b" orderby="terminal_mac">
+  <item name="id" default="" format="@@id"></item>
+  <item name="terminal_mac" default="" format="terminal_mac"></item>  
+  <item name="detect_time" default="" format="@@tenMin"></item>  
+  <item name="terminal_brand" default="" format="terminal_brand"></item>  
+  <item name="field_strength" default="0" format=""></item>  
+  <item name="ssidlog" default="" format=""></item>  
+  <item name="identity_type" default="" format=""></item>  
+  <item name="identity_id" default="" format=""></item>  
+  <item name="hotspot_mac" default="" format=""></item>  
+  <item name="ssid" default="" format=""></item>
+  <item name="hotspot_channel" default="" format=""></item>
+  <item name="id_enctypt_type" default="" format=""></item>
+  <item name="posx" default="" format=""></item>
+  <item name="posy" default="" format=""></item>
+  <item name="site_id" default="" format="site_id"></item>  
+  <item name="device_id" default="" format="device_id"></item>  
+  <item name="device_longti" default="" format="Longti"></item>
+  <item name="device_lat" default="" format="Lat"></item>  
+  <item name="region_id" default="" format="region_id"></item>
+  <item name="firm_id" default="" format="firm_id"></item>
+</data>

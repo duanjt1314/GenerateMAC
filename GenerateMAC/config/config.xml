@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<config>
+  <!--数据库相关配置-->
+  <db>
+    <ip>172.23.88.107,1433</ip>
+    <port></port>
+    <serviceName>wifidb</serviceName>
+    <userName>sa</userName>
+    <pwd>sa</pwd>
+  </db>
+
+  <!--gz文件输出目录-->
+  <outDir>F:\Switch2016\GenerateMAC</outDir>
+</config>
