@@ -68,14 +68,17 @@ namespace GenerateMAC
                     foreach (var item in SysConfig.Install.LayoutItems)
                     {
                         DataTable dt = GetData(item);
+                        LogHelper.Log.InfoFormat("key:{0},清理后的数据量为:" + dt.Rows.Count, item.Key);
                         WriteFile(dt, item.Key);
                     }
-
-                    Wait(600);
                 }
                 catch (Exception ex)
                 {
                     LogHelper.Log.Error("服务运行发生无法识别的异常", ex);
+                }
+                finally
+                {
+                    Wait(10);
                 }
             }
         }
@@ -133,7 +136,7 @@ namespace GenerateMAC
                                     data[i] = dataItem.Format
                                         .Replace("@@currTime", Helper.GetTimeToSeconds() + "")
                                         .Replace("@@tenMin", Helper.GetTimeToSeconds(tenMin) + "")
-                                        .Replace("@@id",CheckSumId.GetIdInt64()+"");
+                                        .Replace("@@id", CheckSumId.GetIdInt64() + "");
                                 }
                                 else
                                 {
@@ -156,7 +159,8 @@ namespace GenerateMAC
                 #endregion
 
                 //清理除去1小时内在其它地方采集到的数据
-                var clearTrace = this.TraceLogs.Where(f => f.DetectTime < Helper.GetTimeToSeconds(DateTime.Now.AddHours(-1)));
+                LogHelper.Log.Info("准备清理1小时内存在的MAC,TraceLogs的数量为:" + TraceLogs.Count);
+                var clearTrace = this.TraceLogs.Where(f => f.DetectTime < Helper.GetTimeToSeconds(DateTime.Now.AddHours(-1))).ToList();
                 foreach (var item in clearTrace)
                 {
                     TraceLogs.Remove(item);
@@ -176,9 +180,9 @@ namespace GenerateMAC
                         }
                         TraceLogs.Add(new TraceLog()
                         {
-                            MAC=mac,
-                            SiteId=siteId,
-                            DetectTime=detect_time
+                            MAC = mac,
+                            SiteId = siteId,
+                            DetectTime = detect_time
                         });
                     }
                 }
@@ -250,7 +254,12 @@ namespace GenerateMAC
                     {
                         string fileName = string.Format("{0}_{1}_{2}_{3}.gz", time, key, index.ToString("d6"), tempTable.Rows.Count.ToString("d6"));
                         WriteDataFile(tempTable, Path.Combine(SysConfig.Install.OutDir, fileName));
+                        LogHelper.Log.Info("成功写入文件:" + fileName);
                     }
+                }
+                else
+                {
+                    LogHelper.Log.Error("数据为空,没有写入文件");
                 }
             }
             catch (Exception ex)

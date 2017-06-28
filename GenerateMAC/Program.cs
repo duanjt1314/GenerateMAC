@@ -18,14 +18,14 @@ namespace GenerateMAC
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
-        static void Main1()
+        static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new TestForm());
         }
 
-        static void Main(string[] args)
+        static void Main1(string[] args)
         {
             //设置应用程序处理异常方式：ThreadException处理
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
