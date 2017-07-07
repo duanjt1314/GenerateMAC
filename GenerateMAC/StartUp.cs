@@ -78,7 +78,7 @@ namespace GenerateMAC
                 }
                 finally
                 {
-                    Wait(10);
+                    Wait(600);
                 }
             }
         }
@@ -178,12 +178,15 @@ namespace GenerateMAC
                             LogHelper.Log.DebugFormat("MAC:{0},siteId:{1}已经出现过,直接删除", mac, siteId);
                             dt.Rows.RemoveAt(i);
                         }
-                        TraceLogs.Add(new TraceLog()
+                        else
                         {
-                            MAC = mac,
-                            SiteId = siteId,
-                            DetectTime = detect_time
-                        });
+                            TraceLogs.Add(new TraceLog()
+                            {
+                                MAC = mac,
+                                SiteId = siteId,
+                                DetectTime = detect_time
+                            });
+                        }
                     }
                 }
                 else if (layoutItem.Key == "WifiTerminalInfoLog")
@@ -199,12 +202,15 @@ namespace GenerateMAC
                             LogHelper.Log.DebugFormat("MAC:{0},siteId:{1}已经出现过,直接删除", mac, siteId);
                             dt.Rows.RemoveAt(i);
                         }
-                        TraceLogs.Add(new TraceLog()
+                        else
                         {
-                            MAC = mac,
-                            SiteId = siteId,
-                            DetectTime = detect_time
-                        });
+                            TraceLogs.Add(new TraceLog()
+                            {
+                                MAC = mac,
+                                SiteId = siteId,
+                                DetectTime = detect_time
+                            });
+                        }
                     }
                 }
                 return dt;
